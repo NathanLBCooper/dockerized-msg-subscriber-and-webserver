@@ -41,5 +41,9 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp"
+    },
+    "files.exclude": {
+        "**/*.o": true,
+        "**/*.exe": true
     }
 }
