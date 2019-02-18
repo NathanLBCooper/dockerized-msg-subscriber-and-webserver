@@ -1,0 +1,13 @@
+[requires]
+# https://github.com/sobotklp/conan-rabbitmq-c
+rabbitmq-c/0.6.0@sobotklp/testing
+
+[generators]
+make
+
+[imports]
+bin, *.dll -> .
+lib, *.dylib* -> .
+lib, *.so -> .
+lib, *.h -> .
+lib, *.lib* -> .

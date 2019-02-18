@@ -44,6 +44,12 @@
     },
     "files.exclude": {
         "**/*.o": true,
-        "**/*.exe": true
+        "**/*.exe": true,
+        "**/*.dll": true,
+        "**/*.lib": true,
+        "conaninfo.txt": true,
+        "conanbuildinfo.*": true,
+        "conan_imports_manifest.txt": true,
+        "graph_info.json": true
     }
 }

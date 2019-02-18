@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Conan
+conaninfo.txt
+conanbuildinfo.*
+conan_imports_manifest.txt
+graph_info.json
