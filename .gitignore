@@ -36,3 +36,6 @@ conaninfo.txt
 conanbuildinfo.*
 conan_imports_manifest.txt
 graph_info.json
+
+# Directories
+build/*
