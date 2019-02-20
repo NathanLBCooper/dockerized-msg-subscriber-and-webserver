@@ -21,14 +21,15 @@ RUN cd /tmp \
 
 COPY x64-linux-musl.cmake /tmp/vcpkg/triplets/
 
-RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install openssl librabbitmq
+RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install openssl librabbitmq catch2
 
 COPY ./src /src
 WORKDIR /src
 RUN mkdir out \
     && cd out \
     && cmake .. -DCMAKE_TOOLCHAIN_FILE=/tmp/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-linux-musl \
-    && make
+    && make \
+    && ctest --verbose
 
 FROM alpine:latest as runtime
 
