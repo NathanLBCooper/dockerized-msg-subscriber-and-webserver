@@ -3,17 +3,26 @@ project(rabbitmqcppexample
             VERSION 0.1.0
             DESCRIPTION "Nathan is trying to figure shit out")
 
+find_package(Threads)
 find_package(Catch2 REQUIRED)
+find_package(fmt REQUIRED)
+find_package(unofficial-http-parser REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
+find_package(restinio REQUIRED)
 
 set(sources
     server.cpp
 )
 add_executable(rabbitmqcppexample ${sources})
-# target_link_libraries(
-#     rabbitmqcppexample
-#     PRIVATE
-#         # stuff
-# )
+target_link_libraries(
+    rabbitmqcppexample
+    PRIVATE
+        ${CMAKE_THREAD_LIBS_INIT}
+        fmt::fmt
+        unofficial::http_parser::http_parser
+        ${Boost_LIBRARIES}
+        restinio::restinio
+)
 set_property(TARGET rabbitmqcppexample
     PROPERTY CXX_STANDARD 17)
 

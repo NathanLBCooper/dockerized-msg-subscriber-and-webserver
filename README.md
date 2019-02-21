@@ -20,7 +20,7 @@ Then that image will be cached and used when you prepare the run image.
 
 To run the service:
 
-    docker run -d --rm  -p 8080:80 --name rabbitmqcppexample rabbitmqcppexample/run
+    docker run -d --rm  -p 8080:8080 --name rabbitmqcppexample rabbitmqcppexample/run
 
 This will start the container detached and will delete it when it is stopped (but not on windows, you need to stop it manually).
 

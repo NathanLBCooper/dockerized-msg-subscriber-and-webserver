@@ -21,7 +21,7 @@ RUN cd /tmp \
 
 COPY x64-linux-musl.cmake /tmp/vcpkg/triplets/
 
-RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install openssl librabbitmq catch2
+RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install openssl librabbitmq catch2 boost-asio fmt http-parser restinio
 
 COPY ./src /src
 WORKDIR /src
@@ -44,4 +44,4 @@ WORKDIR /usr/local/rabbitmqcppexample
 
 CMD ./rabbitmqcppexample
 
-EXPOSE 80
+EXPOSE 8080
