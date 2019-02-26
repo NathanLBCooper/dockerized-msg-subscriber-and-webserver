@@ -1,6 +1,5 @@
 #include "server.hpp"
 
-#include <iostream>
 #include <restinio/all.hpp>
 
 using namespace restinio;
@@ -22,8 +21,10 @@ std::unique_ptr<router::express_router_t<>> createRouter() {
     return router;
 }
 
-int main() {
-    try {
+namespace RabbitMqCppExample {
+    Server::Server() {}
+
+    void Server::run() {
         struct my_server_traits : public default_single_thread_traits_t {
             using request_handler_t = restinio::router::express_router_t<>;
         };
@@ -34,11 +35,4 @@ int main() {
                         .address("0.0.0.0")
                         .request_handler(createRouter()));
     }
-    catch (const std::exception & ex)
-    {
-        std::cout << "Error: " << ex.what() << std::endl;
-        return 1;
-    }
-
-    return 0;
 }

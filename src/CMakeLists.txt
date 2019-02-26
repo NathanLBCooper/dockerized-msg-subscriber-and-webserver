@@ -11,6 +11,7 @@ find_package(Boost REQUIRED COMPONENTS system)
 find_package(restinio REQUIRED)
 
 set(sources
+    main.cpp
     server.cpp
 )
 add_executable(rabbitmqcppexample ${sources})
