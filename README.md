@@ -112,10 +112,6 @@ If your container is running your can use `scp` to do this. Get the headers and 
     scp -r -P 12345 root@localhost:/usr/include .
     scp -r -P 12345 root@localhost:/tmp/vcpkg/installed/x64-linux-musl/include .
     
-Alternatively, you can get them from Docker directly, whether on not the container is running.
-   
-    docker cp -L rabbitmqcppexamplevscode:/usr/include .
-   
 Now configure your Intellisense to pickup these headers.
 
 I used *C:/PersonalSource/rabbitmq-cpp-example/headers* as my header location. Here is my *c_cpp_properties.json*:
@@ -150,3 +146,21 @@ I used *C:/PersonalSource/rabbitmq-cpp-example/headers* as my header location. H
 	}
     
 This is the point where you need a C++ compiler locally (damn!), but I already have one for free with my ruby install.
+
+#### Keeping up with your containers:
+
+When you're done stop the container
+
+    docker stop rabbitmqcppexamplevscode
+
+And then next time start it up again
+
+    docker start findfacesvscode
+    
+And you'll need to rerun your multi-stage build to popylate your runtime container with your changes
+
+    docker build -t rabbitmqcppexample/run .
+
+## Useful
+
+- How do I run sh on an alpine container? `docker exec -it CONTAINERID /bin/sh`
