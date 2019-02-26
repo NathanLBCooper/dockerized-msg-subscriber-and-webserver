@@ -102,3 +102,51 @@ Create this launch configuration (put it in your *.vscode/launch.json*)
 			},
 		]
 	}
+
+#### IntelliSense for C++ with a container:
+
+You need to get the headers on your local machine. Create a directory where you want to put your headers on your local machine. 
+
+If your container is running your can use `scp` to do this. Get the headers and the headers from vcpkg.
+
+    scp -r -P 12345 root@localhost:/usr/include .
+    scp -r -P 12345 root@localhost:/tmp/vcpkg/installed/x64-linux-musl/include .
+    
+Alternatively, you can get them from Docker directly, whether on not the container is running.
+   
+    docker cp -L rabbitmqcppexamplevscode:/usr/include .
+   
+Now configure your Intellisense to pickup these headers.
+
+I used *C:/PersonalSource/rabbitmq-cpp-example/headers* as my header location. Here is my *c_cpp_properties.json*:
+
+	{
+		"configurations": [
+			{
+				"name": "Win32",
+				"includePath": [
+					"${workspaceFolder}/**"
+				],
+				"defines": [
+					"_DEBUG",
+					"UNICODE",
+					"_UNICODE"
+				],
+				"windowsSdkVersion": "10.0.17763.0",
+				"compilerPath": "C://Ruby24-x64//msys64//mingw64//bin//gcc.exe",
+				"cStandard": "c11",
+				"cppStandard": "c++17",
+				"intelliSenseMode": "gcc-x64",
+				"browse": {
+					"path": [
+						"${workspaceFolder}"
+					],
+					"limitSymbolsToIncludedHeaders": true,
+					"databaseFilename": ""
+				}
+			}
+		],
+		"version": 4
+	}
+    
+This is the point where you need a C++ compiler locally (damn!), but I already have one for free with my ruby install.
