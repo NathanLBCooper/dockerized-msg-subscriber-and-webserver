@@ -13,6 +13,7 @@ find_package(restinio REQUIRED)
 set(sources
     main.cpp
     server/server.cpp
+    queue/queueListener.cpp
 )
 add_executable(rabbitmqcppexample ${sources})
 target_link_libraries(
