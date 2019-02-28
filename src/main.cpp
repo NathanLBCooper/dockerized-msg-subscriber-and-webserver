@@ -2,23 +2,25 @@
 #include <thread>
 #include <exception>
 #include <stdexcept>
+#include <vector>
 
-#include "server.hpp"
+#include "server/server.hpp"
 
 using namespace RabbitMqCppExample;
 
-std::thread runServer(std::exception_ptr& exceptionPtr);
-
-int main(){
+int main() {
     try {
-        std::exception_ptr serverExceptionPtr = nullptr;
-        auto serverThread = runServer(serverExceptionPtr);
+        Server server;
+        server.openAsync(
+            // Ok callback. Nothing to do.
+            []{},
+            // Error callback. Rethrow an exception.
+            []( auto ex_ptr ) {
+                std::rethrow_exception( ex_ptr );
+            }
+        );
 
-        serverThread.join();
-
-        if (serverExceptionPtr) {
-            std::rethrow_exception(serverExceptionPtr);
-        }
+        server.join();
     }
     catch (const std::exception & ex)
     {
@@ -27,19 +29,4 @@ int main(){
     }
 
     return 0;
-}
-
-std::thread runServer(std::exception_ptr& exceptionPtr) {
-    std::thread serverThread([&exceptionPtr]() {
-        try {
-            Server server;
-            server.run();
-        }
-        catch (const std::exception & ex)
-        {
-            exceptionPtr = std::current_exception();
-        }
-    });
-
-    return serverThread;
 }

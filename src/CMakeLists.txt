@@ -12,7 +12,7 @@ find_package(restinio REQUIRED)
 
 set(sources
     main.cpp
-    server.cpp
+    server/server.cpp
 )
 add_executable(rabbitmqcppexample ${sources})
 target_link_libraries(
