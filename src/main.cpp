@@ -5,17 +5,25 @@
 #include <vector>
 
 #include "server/server.hpp"
+#include "taskDiagnostic.hpp"
 
 using namespace RabbitMqCppExample;
 
 int main() {
     try {
-        Server server;
+        std::vector<TaskDiagnostic> tasks;
+
+        tasks.push_back(TaskDiagnostic("Diagnostic Server", Status::starting));
+        TaskDiagnostic &serverTask = tasks.back();
+
+        ApplicationDependencies dependencies (&tasks);
+        Server server(dependencies);
         server.openAsync(
-            // Ok callback. Nothing to do.
-            []{},
-            // Error callback. Rethrow an exception.
-            []( auto ex_ptr ) {
+            [&serverTask]{ 
+                serverTask.status = Status::running;
+            },
+            [&serverTask]( auto ex_ptr ) {
+                serverTask.status = Status::failed;
                 std::rethrow_exception( ex_ptr );
             }
         );
