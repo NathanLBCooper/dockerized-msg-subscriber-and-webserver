@@ -7,7 +7,7 @@ Based on a series on devblogs.microsoft.com:
 - [Using VS Code for C++ development with containers](https://devblogs.microsoft.com/cppblog/using-vs-code-for-c-development-with-containers/)
 - [robotdad/findfaces](https://github.com/robotdad/findfaces)
 
-The project itself talks to the world via [RabbitMQ](https://github.com/alanxz/rabbitmq-c) and a [Restinio](https://github.com/Stiffstream/restinio) web server. I imagine it could be given work, the sort of work you want done on C++, by other services.
+The project itself talks to the world via [RabbitMQ](https://github.com/CopernicaMarketingSoftware/AMQP-CPP) and a [Restinio](https://github.com/Stiffstream/restinio) web server. I imagine it could be given work, the sort of work you want done on C++, by other services.
 
 ***NOTE**: I keep this repository in *C:/PersonalSource/*, which turns up in the configurations I provide. If your repository is elsewhere, change this when you see it.*
 

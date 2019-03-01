@@ -5,7 +5,7 @@ FROM alpine:latest as build
 LABEL description="Build container - rabbitmqcppexample"
 
 RUN apk update && apk add --no-cache \ 
-    autoconf build-base binutils cmake curl file gcc g++ git libgcc libtool linux-headers make musl-dev ninja tar unzip wget openssl 
+    autoconf build-base binutils cmake curl file gcc g++ git libgcc libtool linux-headers make musl-dev ninja tar unzip wget openssl openssl-dev
 
 RUN cd /tmp \
     && wget https://github.com/Microsoft/CMake/releases/download/untagged-fb9b4dd1072bc49c0ba9/cmake-3.11.18033000-MSVC_2-Linux-x86_64.sh \
@@ -16,12 +16,12 @@ RUN cd /tmp \
 RUN cd /tmp \
     && git clone https://github.com/Microsoft/vcpkg.git -n \ 
     && cd vcpkg \
-    && git checkout 1d5e22919fcfeba3fe513248e73395c42ac18ae4 \
+    && git checkout 5b0b4b6472fecfe90ce30e108ec56ec0c8bb995f \
     && ./bootstrap-vcpkg.sh -useSystemBinaries
 
 COPY x64-linux-musl.cmake /tmp/vcpkg/triplets/
 
-RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install openssl librabbitmq catch2 boost-asio fmt http-parser restinio
+RUN VCPKG_FORCE_SYSTEM_BINARIES=1 ./tmp/vcpkg/vcpkg install openssl catch2 boost-asio fmt http-parser restinio amqpcpp
 
 COPY ./src /src
 WORKDIR /src

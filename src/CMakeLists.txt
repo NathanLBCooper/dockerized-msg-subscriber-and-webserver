@@ -9,11 +9,13 @@ find_package(fmt REQUIRED)
 find_package(unofficial-http-parser REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(restinio REQUIRED)
+find_package(amqpcpp REQUIRED)
 
 set(sources
     main.cpp
     server/server.cpp
     queue/queueListener.cpp
+    queue/connectionHandler.cpp
 )
 add_executable(rabbitmqcppexample ${sources})
 target_link_libraries(
@@ -24,6 +26,7 @@ target_link_libraries(
         unofficial::http_parser::http_parser
         ${Boost_LIBRARIES}
         restinio::restinio
+        amqpcpp
 )
 set_property(TARGET rabbitmqcppexample
     PROPERTY CXX_STANDARD 17)
