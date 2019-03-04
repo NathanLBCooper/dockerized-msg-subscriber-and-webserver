@@ -6,7 +6,7 @@
 
 #include "server/server.hpp"
 #include "taskDiagnostic.hpp"
-#include "queue/queueListener.hpp"
+#include "worker/worker.hpp"
 
 using namespace RabbitMqCppExample;
 
@@ -29,11 +29,11 @@ int main() {
             }
         );
 
-        tasks.push_back(TaskDiagnostic("Queue Listener", Status::starting));
+        tasks.push_back(TaskDiagnostic("Worker", Status::starting));
         TaskDiagnostic &listenerTask = tasks.back();
 
-        QueueListener queueListener;
-        queueListener.listenAsync(
+        Worker worker;
+        worker.listenAsync(
             [&listenerTask]{ 
                 listenerTask.status = Status::running;
             },
@@ -47,7 +47,7 @@ int main() {
             }
         );
 
-        queueListener.join();
+        worker.join();
         server.join();
     }
     catch (const std::exception & ex)

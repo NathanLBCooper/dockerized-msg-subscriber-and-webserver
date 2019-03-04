@@ -7,15 +7,14 @@ find_package(Threads)
 find_package(Catch2 REQUIRED)
 find_package(fmt REQUIRED)
 find_package(unofficial-http-parser REQUIRED)
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system thread)
 find_package(restinio REQUIRED)
 find_package(amqpcpp REQUIRED)
 
 set(sources
     main.cpp
     server/server.cpp
-    queue/queueListener.cpp
-    queue/connectionHandler.cpp
+    worker/worker.cpp
 )
 add_executable(rabbitmqcppexample ${sources})
 target_link_libraries(
